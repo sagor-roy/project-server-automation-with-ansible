@@ -1,0 +1,13 @@
+---
+- name: Install Laravel 11 on VM
+  hosts: all
+  become: true
+
+  roles:
+    - common
+    - mysql
+    - firewall
+    - php
+    - composer
+    - project
+    - apache

@@ -1,0 +1,12 @@
+# AWS playbook
+---
+- name: Provisioning EC2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  roles:
+    # - create-security-group
+    - create-ec2-instance
+    - ssh-key-pair
+    - instance-facts

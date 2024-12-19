@@ -1,0 +1,85 @@
+#mysql install
+- name: install mysql-server
+  apt:
+    name: mysql-server
+    state: present
+
+- name: install mysql-client
+  apt:
+    name: mysql-client
+    state: present
+
+- name: install python3-pymysql
+  apt:
+    name: python3-pymysql
+    state: present
+
+- name: install python3-mysqldb
+  apt:
+    name: python3-mysqldb
+    state: present
+
+- name: install libmysqlclient-dev
+  apt:
+    name: libmysqlclient-dev
+    state: present
+
+#mysql config
+- name: start and enable mysql service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Change the auhentication plugin of mysql root user to mysql_native_password
+  shell: mysql -u root -e 'UPDATE mysql.user SET plugin="mysql_native_password" WHERE user="root" AND host="localhost"'
+
+- name: Flush Privileges
+  shell: mysql -u root -e 'FLUSH PRIVILEGES'
+
+- name: Sets the root password
+  mysql_user:
+    login_host: "localhost"
+    login_user: "root"
+    login_password: ""
+    name: root
+    password: "{{ mysql_root_password }}"
+    state: present
+
+- name: Removes all anonymous user accounts
+  mysql_user:
+    name: ""
+    host_all: yes
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+#create database
+- name: Create a database
+  mysql_db:
+    name: "{{ mysql_database_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+# Copy SQL file to the remote server
+- name: Copy SQL file to the remote server
+  copy:
+    src: "vihicle.sql"
+    dest: "/tmp/vihicle.sql"
+
+# Direct SQL Import using Ansible mysql_db module
+- name: Import SQL file into MySQL database
+  mysql_db:
+    name: "{{ mysql_database_name }}"
+    state: import
+    target: "/tmp/vihicle.sql"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+# Remove SQL file from remote server
+- name: Remove SQL file after import
+  ansible.builtin.file:
+    path: "/tmp/vihicle.sql"
+    state: absent
+  when: mysql_db is succeeded

@@ -1,0 +1,47 @@
+#php install
+- name: Add php repository
+  apt_repository:
+    repo: "ppa:ondrej/php"
+- name: Updating the repo
+  apt: update_cache=yes
+- name: Install PHP
+  apt: name=php8.3 state=latest
+- name: Install PHP MB
+  apt: name=php8.3-mbstring state=latest
+- name: Install PHP XML
+  apt: name=php8.3-xml state=latest
+- name: Install PHP ZIP
+  apt: name=php8.3-zip state=latest
+- name: Install PHP CURL
+  apt: name=php8.3-curl state=latest
+- name: Install libapache2-mod-php
+  apt: name=libapache2-mod-php state=latest
+- name: PHP DEV
+  apt: name=php8.3-dev state=latest
+- name: PHP mysql
+  apt: name=php8.3-mysql state=latest
+- name: PHP  XMLRPC
+  apt: name=php8.3-xmlrpc state=latest
+- name: PHP  DEV
+  apt: name=php8.3-dev state=latest
+- name: PHP common
+  apt: name=php8.3-common state=latest
+- name: PHP gd
+  apt: name=php8.3-gd state=latest
+- name: PHP imagick
+  apt: name=php8.3-imagick state=latest
+- name: PHP CLI
+  apt: name=php8.3-cli state=latest
+- name: PHP imap
+  apt: name=php8.3-imap state=latest
+- name: PHP intl
+  apt: name=php8.3-intl state=latest
+- name: Install some required softwares for php functionality
+  apt:
+    name:
+      - ca-certificates
+      - apt-transport-https
+      - software-properties-common
+      - lsb-release
+    state: latest
+    update_cache: true

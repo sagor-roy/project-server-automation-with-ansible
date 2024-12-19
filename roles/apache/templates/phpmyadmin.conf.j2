@@ -1,0 +1,14 @@
+Alias /phpmyadmin /usr/share/phpmyadmin
+
+<Directory /usr/share/phpmyadmin>
+    Options FollowSymLinks
+    DirectoryIndex index.php
+
+    <IfModule mod_php.c>
+        AddType application/x-httpd-php .php
+    </IfModule>
+
+    <FilesMatch \.php$>
+        Require all granted
+    </FilesMatch>
+</Directory>

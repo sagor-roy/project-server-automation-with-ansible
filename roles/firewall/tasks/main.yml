@@ -1,0 +1,8 @@
+- name: Allow HTTP, HTTPS, and MySQL ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop:
+    - "80"
+    - "443"
+    - "3306"

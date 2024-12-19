@@ -1,0 +1,20 @@
+#apache site config
+- name: Remove default apache vhost config from sites-enabled
+  file: name=/etc/apache2/sites-enabled/000-default.conf state=absent
+
+- name: create apache vhosts for domain
+  template: src=web.conf.j2 dest="/etc/apache2/sites-available/{{ project_name }}.conf" owner=www-data mode=0644
+
+- name: Deploy Apache alias for phpMyAdmin
+  template: src=phpmyadmin.conf.j2 dest="/etc/apache2/conf-available/phpmyadmin.conf" owner=www-data mode=0644
+
+- name: Enable phpMyAdmin configuration
+  command: a2enconf phpmyadmin
+
+- name: Update a2ensite
+  command: a2ensite {{ project_name }}
+
+- name: Enable apache rewrite module
+  shell: a2enmod rewrite
+  notify:
+    - Restart apache

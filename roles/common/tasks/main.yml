@@ -1,0 +1,18 @@
+#update
+- name: update "apt"
+  apt:
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
+#package install
+- name: install (git, wget, apache, ufw, unzip, curl)
+  apt:
+    pkg:
+      - git
+      - wget
+      - apache2
+      - ufw
+      - unzip
+      - curl
+      - phpmyadmin
