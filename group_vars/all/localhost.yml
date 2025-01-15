@@ -1,6 +1,6 @@
 #name
 project_name: "vihicle_app"
-key_name: my_aws
+key_name: id_ed25519
 
 #instance
 instance_name: "production"

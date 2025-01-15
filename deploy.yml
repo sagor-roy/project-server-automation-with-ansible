@@ -4,10 +4,10 @@
   become: true
 
   roles:
-    - common
-    - mysql
-    - firewall
-    - php
-    - composer
-    - project
-    - apache
+    - server-config/common
+    - server-config/mysql
+    - server-config/firewall
+    - server-config/php
+    - server-config/composer
+    - server-config/project
+    - server-config/apache

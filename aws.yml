@@ -7,6 +7,6 @@
 
   roles:
     # - create-security-group
-    - create-ec2-instance
-    - ssh-key-pair
-    - instance-facts
+    - aws-instance-create/ssh-key-pair
+    - aws-instance-create/create-ec2-instance
+    - aws-instance-create/instance-facts
