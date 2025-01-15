@@ -18,3 +18,4 @@ mysql_database_name: "vihicle"
 # CMD for Playbook Run
 # ansible-playbook aws.yml --ask-vault-pass
 # ansible-playbook -i inventory/hosts deploy.yml --ask-vault-pass
+#ansible-vault encrypt group_vars/all/secrets.yml
