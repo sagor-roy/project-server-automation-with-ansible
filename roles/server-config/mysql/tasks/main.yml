@@ -77,9 +77,3 @@
     login_user: root
     login_password: "{{ mysql_root_password }}"
 
-# Remove SQL file from remote server
-- name: Remove SQL file after import
-  ansible.builtin.file:
-    path: "/tmp/vihicle.sql"
-    state: absent
-  when: mysql_db is succeeded
